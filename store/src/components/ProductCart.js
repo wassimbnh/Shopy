@@ -4,20 +4,37 @@ import '../App.css';
 import { CartContext } from '../CartContext';
 import { useContext } from 'react';
 import { CDBBtn } from "cdbreact";
+import { useNavigate } from 'react-router';
 
 const ProductCart = (props) => {
   const product = props.product;
   const cart = useContext(CartContext);
   const productQuantity = cart.getProductQuantity(product.id);
+  const navigate = useNavigate();
   console.log(cart.items);
+
+  function handleItem(){
+    navigate(`item/${product.ident}`);
+  }
+
+  React.useEffect(() => {
+    function handlePopState() {
+      window.scrollTo(0, 0);
+    }
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   return (
     <div className="product-card">
       <Card.Img
-        className="product-image"
+        className="product-image cursor-pointer"
         variant="top"
         src={require(`../assets/images/${product.img}`)}
         alt={product.title}
+        onClick={handleItem}
       />
       <Card.Body>
         <Card.Title>{product.title}</Card.Title>

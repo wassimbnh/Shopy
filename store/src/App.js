@@ -9,14 +9,16 @@ import CartProvider from './CartContext';
 import CarouselComponent from './components/Carousel';
 import Footer from './components/Footer';
 import ProductDetail from './components/ProductDetail';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <CartProvider>
     <Container >
       <NavbarComp />
-      
+      <ScrollToTop />
     <Routes>
+      
       <Route index element={ <>   <CarouselComponent /><Store /></>} />
       <Route path="success" element={<Success />}/>
       <Route path="cancel" element={<Cancel />}/>

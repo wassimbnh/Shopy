@@ -5,6 +5,8 @@ import { useContext} from 'react';
 import { productsArray } from "../productStore"
 import { useParams } from 'react-router';
 import { CDBBtn } from "cdbreact";
+import NotExistsProduct from './NotExistsProduct';
+import ReletedProducts from './ReletedProducts';
 
 const ProductDetail = () => {
   const cart = useContext(CartContext);
@@ -12,15 +14,15 @@ const ProductDetail = () => {
 
   const prod = productsArray.find(product => product.ident === Number(ident));
 
-  const productQuantity = cart.getProductQuantity(prod.id);
+  
 
   return (
-    <div className="product-detail">
-      <Card className="mb-3">
+    <div className="product-detail-container">
+      { prod ? <Card className="mb-3">
         <Row>                                       
-          <Col md={6}>
+          <Col md={4}>
             <Card.Img
-              className="product-image"
+              className="product-img-detail"
               variant="top"
               src={require(`../assets/images/${prod.img}`)}
               alt={prod.title}
@@ -29,12 +31,12 @@ const ProductDetail = () => {
           </Col>
           <Col md={6}>
             <Card.Body>
-              <Card.Title>{prod.title}</Card.Title>
-              <Card.Text className="product-price">
-                ${prod.price}
+              <Card.Text className="product-det">{prod.title}</Card.Text>
+              <Card.Text className="product-det">
+                Price : ${prod.price}
               </Card.Text>
               <Card.Text>{prod.description}</Card.Text>
-              {productQuantity > 0 ? (
+              {cart.getProductQuantity(prod.id) > 0 ? (
                 <>
                   <div className="d-flex">
                     <CDBBtn color='primary' circle
@@ -43,7 +45,7 @@ const ProductDetail = () => {
                     >
                       +
                     </CDBBtn>
-                    <span>{productQuantity}</span>
+                    <span>{cart.getProductQuantity(prod.id)}</span>
                     <CDBBtn color='primary' circle
                       className="mx-2"
                       onClick={() => cart.removeOneFromCart(prod.id)}
@@ -72,8 +74,10 @@ const ProductDetail = () => {
             </Card.Body>
           </Col>
         </Row>
-      </Card>
-    </div>
+      </Card>: <NotExistsProduct />}
+      <ReletedProducts />
+    </div> 
+
   );
 };
 
