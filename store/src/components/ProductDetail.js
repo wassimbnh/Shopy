@@ -1,62 +1,73 @@
-import React from 'react';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import '../App.css';
 import { CartContext } from '../CartContext';
-import { useContext } from 'react';
+import { useContext} from 'react';
+import { productsArray } from "../productStore"
+import { useParams } from 'react-router';
+import { CDBBtn } from "cdbreact";
 
-const ProductDetail = (props) => {
-  const product = props.product;
+const ProductDetail = () => {
   const cart = useContext(CartContext);
-  const productQuantity = cart.getProductQuantity(product.id);
-  console.log(cart.items);
+  const { ident } = useParams();
+
+  const prod = productsArray.find(product => product.ident === Number(ident));
+
+  const productQuantity = cart.getProductQuantity(prod.id);
 
   return (
     <div className="product-detail">
       <Card className="mb-3">
-        <Row>
+        <Row>                                       
           <Col md={6}>
             <Card.Img
               className="product-image"
               variant="top"
-              src={require(`../assets/images/${product.img}`)}
-              alt={product.title}
+              src={require(`../assets/images/${prod.img}`)}
+              alt={prod.title}
+              rounded
             />
           </Col>
           <Col md={6}>
             <Card.Body>
-              <Card.Title>{product.title}</Card.Title>
-              <Card.Text>${product.price}</Card.Text>
-              <Card.Text>{product.description}</Card.Text>
+              <Card.Title>{prod.title}</Card.Title>
+              <Card.Text className="product-price">
+                ${prod.price}
+              </Card.Text>
+              <Card.Text>{prod.description}</Card.Text>
               {productQuantity > 0 ? (
                 <>
-                  <Button
-                    className="mx-2"
-                    onClick={() => cart.addOneToCart(product.id)}
-                  >
-                    +
-                  </Button>
-                  <Button
-                    className="mx-2"
-                    onClick={() => cart.removeOneFromCart(product.id)}
-                  >
-                    -
-                  </Button>
-                  <Button
+                  <div className="d-flex">
+                    <CDBBtn color='primary' circle
+                      className="mx-2"
+                      onClick={() => cart.addOneToCart(prod.id)}
+                    >
+                      +
+                    </CDBBtn>
+                    <span>{productQuantity}</span>
+                    <CDBBtn color='primary' circle
+                      className="mx-2"
+                      onClick={() => cart.removeOneFromCart(prod.id)}
+                    >
+                      -
+                    </CDBBtn>
+                    
+                  </div>
+                  <CDBBtn 
+                    color="danger" circle
                     variant="danger"
-                    className="mx-2"
-                    onClick={() => cart.deleteFromCart(product.id)}
+                    className="mx-2 mt-2"
+                    onClick={() => cart.deleteFromCart(prod.id)}
                   >
                     Remove from Cart
-                  </Button>
-                  <span>In Cart: {productQuantity}</span>
+                  </CDBBtn>
                 </>
               ) : (
-                <Button
-                  variant="primary"
-                  onClick={() => cart.addOneToCart(product.id)}
+                <CDBBtn
+                  color="light" circle
+                  onClick={() => cart.addOneToCart(prod.id)}
                 >      
                   Add to Cart
-                </Button>
+                </CDBBtn>
               )}
             </Card.Body>
           </Col>
@@ -66,4 +77,4 @@ const ProductDetail = (props) => {
   );
 };
 
-export default ProductDet
+export default ProductDetail;

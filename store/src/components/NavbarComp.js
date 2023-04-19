@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { BiLogOut} from 'react-icons/bi'
 import {CgProfile}from 'react-icons/cg'
+import { CDBBtn } from "cdbreact";
+
 
 const NavbarComp = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -109,9 +111,9 @@ const NavbarComp = () => {
               ))}  
               <h1>Total: {cart.getTotalCost().toFixed(2)}$</h1>
 
-              <Button variant="success" onClick={checkout}>
+              <CDBBtn color="success" circle onClick={checkout}>
                 Purchase items
-              </Button>
+              </CDBBtn >
             </>
           ) : (
             <h1>Your Cart is empty</h1>

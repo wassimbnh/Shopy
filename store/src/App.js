@@ -20,7 +20,7 @@ function App() {
       <Route index element={ <>   <CarouselComponent /><Store /></>} />
       <Route path="success" element={<Success />}/>
       <Route path="cancel" element={<Cancel />}/>
-      <Route path='item/' element={<ProductDetail />} />
+      <Route path='item/:ident' element={<ProductDetail />} />
     </Routes>
     </Container>
     <Footer />

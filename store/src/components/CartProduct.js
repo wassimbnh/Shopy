@@ -5,6 +5,8 @@ import { getProductData } from '../productStore'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import '../App.css'
+import { CDBBtn } from "cdbreact";
+
 
 const CartProduct = (props) => {
     const cart = useContext(CartContext);
@@ -19,9 +21,9 @@ const CartProduct = (props) => {
                 <div className="product-info">
                     <h3>{productData.title}</h3>
                     <div className="quantity-controls">
-                        <Button variant='outline-primary' className='btn-circle' onClick={() => cart.addOneToCart(productData.id)}>+</Button>
+                        <CDBBtn  color='primary' circle className='btn-circle' onClick={() => cart.addOneToCart(productData.id)}>+</CDBBtn>
                         <p>{quantity}</p>
-                        <Button variant='outline-primary' className='btn-circle' onClick={() => cart.removeOneFromCart(productData.id)}>-</Button>
+                        <CDBBtn color='primary' circle className='btn-circle' onClick={() => cart.removeOneFromCart(productData.id)}>-</CDBBtn>
                     </div>
                     <p className="price">${(quantity * productData.price).toFixed(2)}</p>
                 </div>

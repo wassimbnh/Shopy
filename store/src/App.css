@@ -100,5 +100,17 @@
   transform: translateY(-5px);
 }
 
+button {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
 
 
