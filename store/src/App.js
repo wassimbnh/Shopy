@@ -10,6 +10,7 @@ import CarouselComponent from './components/Carousel';
 import Footer from './components/Footer';
 import ProductDetail from './components/ProductDetail';
 import ScrollToTop from './components/ScrollToTop';
+import Auth from './pages/Auth';
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
       <ScrollToTop />
     <Routes>
       
-      <Route index element={ <>   <CarouselComponent /><Store /></>} />
+      <Route path='/' element={ <>   <CarouselComponent /> <Store /> </>} />
       <Route path="success" element={<Success />}/>
       <Route path="cancel" element={<Cancel />}/>
       <Route path='item/:ident' element={<ProductDetail />} />
+      <Route path="signin" element={<Auth />}/>
     </Routes>
     </Container>
     <Footer />

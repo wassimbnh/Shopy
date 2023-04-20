@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Form, Row, Col } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import '../App.css';
 import { CartContext } from '../CartContext';
 import { useContext } from 'react';

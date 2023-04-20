@@ -7,15 +7,16 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { BiLogOut} from 'react-icons/bi'
 import {CgProfile}from 'react-icons/cg'
 import { CDBBtn } from "cdbreact";
+import { useNavigate } from 'react-router'
 
 
 const NavbarComp = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const isLoggedIn = false
   const cart = useContext(CartContext)
   const [show, setShow] = useState(false)
   const [showProfile, setShowProfile] = useState(false);
 
-  
+  const navigate= useNavigate()
 
 
 
@@ -81,12 +82,15 @@ const NavbarComp = () => {
 
                 <Dropdown.Menu show={showProfile}>
                   <Dropdown.Item href="#/action-1"><CgProfile />Profile</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2" onClick={()=>setIsLoggedIn(false)}><BiLogOut className='mr-1'/>Logout</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2" ><BiLogOut className='mr-1'/>Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             ) : (
-              <Button variant="outline-secondary" className="rounded-pill mr-2 mx-2">
-                Sign Up
+              <Button variant="outline-secondary"
+                     className="rounded-pill mr-2 mx-2"
+                     onClick={()=>navigate('/signin')}
+               >
+                Sign in
               </Button>
             )}
 
