@@ -39,9 +39,11 @@ function SignIn() {
               
 
               
-
+              <div className='d-flex align-items-center '>
               <CDBBtn color='primary' circle size='lg' className='px-4 py-2'>Sign in</CDBBtn>
+              <a href="signup" className='px-2'>Don't have an account?</a>
 
+              </div>
             </MDBCol>
 
             <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>

@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import ProductDetail from './components/ProductDetail';
 import ScrollToTop from './components/ScrollToTop';
 import Auth from './pages/Auth';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="cancel" element={<Cancel />}/>
       <Route path='item/:ident' element={<ProductDetail />} />
       <Route path="signin" element={<Auth />}/>
+      <Route path="signup" element={<SignUp />}/>
     </Routes>
     </Container>
     <Footer />

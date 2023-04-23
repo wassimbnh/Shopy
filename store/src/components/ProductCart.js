@@ -40,10 +40,10 @@ const ProductCart = (props) => {
         <Card.Title>{product.title}</Card.Title>
         <Card.Text>${product.price}</Card.Text>
         {productQuantity > 0 ? (
-          <Form className="d-flex align-items-center">
-            <Form.Label className="mr-2">In Cart: {productQuantity}</Form.Label>
+  <Form className="d-flex align-items-center">
+            {/*<Form.Label className="mr-2">In Cart: {productQuantity}</Form.Label>
             <CDBBtn color='primary' circle className="mx-2 mr-2" onClick={() => cart.addOneToCart(product.id)}>+</CDBBtn>
-            <CDBBtn color='primary' circle className="mx-2 ml-2" onClick={() => cart.removeOneFromCart(product.id)}>-</CDBBtn>
+            <CDBBtn color='primary' circle className="mx-2 ml-2" onClick={() => cart.removeOneFromCart(product.id)}>-</CDBBtn> */}
             <CDBBtn color="danger" circle variant="danger" className="m-2" onClick={() => cart.deleteFromCart(product.id)}>Remove from Cart</CDBBtn>
           </Form>
         ) : (
