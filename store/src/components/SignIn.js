@@ -37,10 +37,11 @@ function SignIn() {
               </div>
 
               
+              <CDBBtn color='primary' circle size='lg' className='px-4 py-2'>Sign in</CDBBtn>
 
               
-              <div className='d-flex align-items-center '>
-              <CDBBtn color='primary' circle size='lg' className='px-4 py-2'>Sign in</CDBBtn>
+              <div className='d-flex align-items'>
+              <a href="/forgot-password" className='px-4'>Forgot Password?</a>
               <a href="signup" className='px-2'>Don't have an account?</a>
 
               </div>

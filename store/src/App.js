@@ -12,6 +12,7 @@ import ProductDetail from './components/ProductDetail';
 import ScrollToTop from './components/ScrollToTop';
 import Auth from './pages/Auth';
 import SignUp from './components/SignUp';
+import ForgotPassword from './components/ForgotPassword';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path='item/:ident' element={<ProductDetail />} />
       <Route path="signin" element={<Auth />}/>
       <Route path="signup" element={<SignUp />}/>
+      <Route path="forgot-password" element={<ForgotPassword />}/>
     </Routes>
     </Container>
     <Footer />

@@ -17,6 +17,7 @@ const productsArray = [
         ident:2,
         title:"Jacket",
         img: "jacket.jpg",
+        description:"Lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu",
         price : 119.99
     },
     {
@@ -24,6 +25,7 @@ const productsArray = [
         title:"Black Shirt",
         ident:3,
         img:'blackshirt.jpg',
+        description:"Lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu",
         price : 11.99
     },
     {
@@ -31,6 +33,7 @@ const productsArray = [
         ident:4,
         title:"Jeans",
         img:"jeans.jpg",
+        description:"Lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu",
         price : 44.99
     },
     {
@@ -38,12 +41,14 @@ const productsArray = [
         title:"Sweater",
         ident: 5,
         img:"sweater.jpg",
+        description:"Lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu",
         price : 25.99
     },
     {
         id:"price_1MxYxnEXYQfbBZFa8h3ClwDr",
         title:"SweatShirt",
         ident:6,
+        description:"Lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu lorem ipsu",
         img:"sweatshirt.jpg",
         price : 15.99
     }

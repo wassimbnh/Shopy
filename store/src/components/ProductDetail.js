@@ -35,7 +35,6 @@ const ProductDetail = () => {
               <Card.Text className="product-det">
                 Price : ${prod.price}
               </Card.Text>
-              <Card.Text>{prod.description}</Card.Text>
               {cart.getProductQuantity(prod.id) > 0 ? (
                 <>
                   <div className="d-flex">
@@ -70,7 +69,10 @@ const ProductDetail = () => {
                 >      
                   Add to Cart
                 </CDBBtn>
+                
               )}
+              <Card.Text className='py-3'>{prod.description}</Card.Text>
+
             </Card.Body>
           </Col>
         </Row>
