@@ -37,21 +37,3 @@ app.post("/checkout", async (req, res) => {
 });
 
 app.listen(4000, () => console.log("Listening on port 4000!"));
-/*
-req.body.items 
-[
-    {
-        id:1,
-        quantity:3
-    }
-
-]
-stripe 
-[
-    {
-        price:1,
-        quantity:3
-    }
-
-]
-*/
