@@ -205,11 +205,14 @@ const userController = {
     }catch(err){
             return res.status(500).json({ msg: err.message})
     }
-
     },
 
     forgetPassword: async(req,res) =>{
+        try{
 
+        }catch(err){
+            res.status(400).json({msg: err.message});
+        }
     },
 
     resetPassword: async(req,res) =>{
