@@ -3,6 +3,7 @@ const validEmail = require('../helpers/validateEmail')
 const  {mailSender} = require('../helpers/mailSender')
 const createToken = require('../helpers/createToken')
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 
 
 const userController = {
@@ -122,7 +123,34 @@ const userController = {
     },  
     
     activate: async(req,res) =>{
+        try{
 
+        //get token
+        const { activation_token } = req.body;
+
+        //verify token
+        const user = jwt.verify(activation_token, process.env.activation_token);
+        const { name, email, password} = user;
+
+        //check user 
+        const checkUser = await User.findOne({ email });
+        if(checkUser)
+            return res.status(400).json({ msg: "This email is already registered." });
+
+        //add user
+        const newUser = new User({
+            name,
+            email,
+            password,
+          });
+          await newUser.save();
+
+        // activation success
+        res.status(200).json({ msg: "Your account has been activated, you can now sign in." });
+
+        }catch(err){
+            res.status(500).json({ msg: err.message });
+        }
     },
 
     signin: async(req,res) =>{
