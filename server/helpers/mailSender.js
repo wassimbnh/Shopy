@@ -17,7 +17,7 @@ const nodemailer = require('nodemailer');
   
      let info =  transporter.sendMail({ 
        from: process.env.EMAIL_SENDER, 
-       to, 
+       to,        
        subject,  
        html,  
      }); 
