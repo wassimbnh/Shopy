@@ -1,19 +1,19 @@
-
-
 const express = require('express');
 var cors = require('cors');
-const dotenv
- = require('dotenv').config()
+const dotenv = require('dotenv').config()
 const stripe = require('stripe')(process.env.STRIPE_SERCRET_KEY);
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/userRoutes')
+const cookieParser = require('cookie-parser')
+const PORT = 4000;
 
 const app = express();
 
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
-const PORT = 4000;
+app.use(cookieParser());
+
 
 //db
 mongoose.connect(
