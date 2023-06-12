@@ -9,5 +9,6 @@ route.post('/sign-in', userController.signin);
 route.post('/access', userController.access);
 route.post('/forgot-password', userController.forgetPassword);
 route.post('/reset-password',auth, userController.resetPassword);
+route.get('/user-info',auth, userController.getUserInfo);
 
 module.exports = route;
