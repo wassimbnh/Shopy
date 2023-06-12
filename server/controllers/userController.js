@@ -345,7 +345,21 @@ const userController = {
     },
 
     updateUserInfo: async(req,res) =>{
+      try{
+        const { name } = req.body;
 
+        //update
+        await User.findOneAndUpdate(
+          { _id: req.user.id},
+          {name}
+        );
+
+        //success
+        res.status(200).json({ msg: "Updated success"})
+
+      }catch(err){
+        res.status(500).json({ msg: err.message });
+      }
     },
 
     signOut: async(req,res) =>{

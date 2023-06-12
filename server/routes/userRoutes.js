@@ -10,5 +10,7 @@ route.post('/access', userController.access);
 route.post('/forgot-password', userController.forgetPassword);
 route.post('/reset-password',auth, userController.resetPassword);
 route.get('/user-info',auth, userController.getUserInfo);
+route.patch('/update-user', auth , userController.updateUserInfo);
+
 
 module.exports = route;
