@@ -11,6 +11,6 @@ route.post('/forgot-password', userController.forgetPassword);
 route.post('/reset-password',auth, userController.resetPassword);
 route.get('/user-info',auth, userController.getUserInfo);
 route.patch('/update-user', auth , userController.updateUserInfo);
-
+route.post('/sign-out',auth, userController.signOut);
 
 module.exports = route;
