@@ -12,7 +12,7 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post('http://localhost:4000/api/auth/register', userData);
-      return response.data.msg;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -20,7 +20,7 @@ export const registerUser = createAsyncThunk(
 );
 
 const signupSlice = createSlice({
-  name: 'auth',
+  name: 'signup',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -33,11 +33,11 @@ const signupSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.successMessage = action.payload;
+        state.successMessage = action.payload.msg;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.msg || 'Something went wrong';
+        state.error = action.payload?.msg || 'Something went wrong';
         state.successMessage = '';
       });
   },
