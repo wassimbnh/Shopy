@@ -16,6 +16,7 @@ import {
 import { CDBBtn } from 'cdbreact';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../App.css'
 
 function SignUp() {
   const form = useForm();
@@ -28,14 +29,14 @@ function SignUp() {
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(registerUser(data));
-      handleReset();
+      //handleReset();
       console.log(response.payload.msg)
       toast.success(response.payload.msg, {
         className: 'toast-success',
         bodyClassName: 'toast-success',
       });
-    } catch (error) {
-      toast.error("Registration failed. Please try again.", {
+    } catch (err) {
+      toast.warn(err.msg, {
         className: 'toast-error',
         bodyClassName: 'toast-error',
       });

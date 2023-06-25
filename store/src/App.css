@@ -123,6 +123,17 @@ button {
 }
 
 
+.toast-success {
+  background-color: lightgreen !important;
+  color: white !important;
+}
+
+
+.toast-error {
+  background-color: red !important;
+  color: white !important;
+}
+
 
 
 
