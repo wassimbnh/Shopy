@@ -14,13 +14,12 @@ import {
 from 'mdb-react-ui-kit';
 import { CDBBtn } from "cdbreact";
 import { useForm } from 'react-hook-form'
-import { DevTool } from '@hookform/devtools';
 
 
 function SignUp() {
 
   const form =useForm();
-  const { register, formState,control, watch, handleSubmit } = form;
+  const { register, formState, watch, handleSubmit } = form;
   const { errors } = formState;
 
   const password = watch('password');
@@ -74,7 +73,7 @@ function SignUp() {
                           id='password'
                            type='password'
                            {...register("password",{
-                            require: "Password is required",
+                            required: "Password is required",
                             minLength:{
                               value:8,
                               message: "Password should have at least 8 characters"
@@ -105,7 +104,6 @@ function SignUp() {
               <CDBBtn type='submit' color='primary' circle size='lg' className='px-4 py-2'>Register</CDBBtn>
 
               </form>
-              <DevTool control={control} />
             </MDBCol>
 
             <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
