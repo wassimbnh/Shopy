@@ -40,7 +40,7 @@ const userController = {
         const activation_token = createToken.activation(newUser);
 
         // send emailconst
-         const url = `http://localhost:3000/api/auth/activate/${activation_token}`;///////////////////////////////////////////////////////////////////////////////////////
+         const url = `http://localhost:3000/activate/${activation_token}`;///////////////////////////////////////////////////////////////////////////////////////
         mailSender(email,"VERIFICATION EMAIL TO CREATE ACCOUNT", `<html lang="en"> 
          <head>
              <meta charset="UTF8" />
