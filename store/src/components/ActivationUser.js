@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { activateUser } from '../redux/activateSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ActivationUser = () => {
   const dispatch = useDispatch();
@@ -12,12 +14,13 @@ const ActivationUser = () => {
     dispatch(activateUser(activation_token))
       .unwrap()
       .catch((error) => {
-        console.log('Error activating user:', error);
+        toast(error.message)
       });
   }, [dispatch, activation_token]);
 
   return (
     <div>
+      <ToastContainer />
       <div className="d-flex justify-content-center align-items-center vh-100">
         <div className="text-center">
           <i className="fas fa-check-circle fa-7x text-success mb-4"></i>
