@@ -29,7 +29,7 @@ function SignUp() {
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(registerUser(data));
-      //handleReset();
+      handleReset();
       console.log(response.payload.msg)
       toast(response.payload.msg,{
         
