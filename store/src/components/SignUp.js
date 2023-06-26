@@ -31,15 +31,11 @@ function SignUp() {
       const response = await dispatch(registerUser(data));
       //handleReset();
       console.log(response.payload.msg)
-      toast.success(response.payload.msg, {
-        className: 'toast-success',
-        bodyClassName: 'toast-success',
+      toast.info(response.payload.msg,{
+        className: 'toast-success'
       });
     } catch (err) {
-      toast.warn(err.msg, {
-        className: 'toast-error',
-        bodyClassName: 'toast-error',
-      });
+      toast.warn(err.message); 
     }
   };
   

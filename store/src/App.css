@@ -122,17 +122,18 @@ button {
   padding-top: 56px; /* Change 56px to the height of your navbar */
 }
 
+.toast-failed {
+  background-color: rgb(218, 9, 9) !important;
+  color: white !important;
+}
 
 .toast-success {
-  background-color: lightgreen !important;
+  background-color: rgb(18, 222, 18) !important;
   color: white !important;
 }
 
 
-.toast-error {
-  background-color: red !important;
-  color: white !important;
-}
+
 
 
 
