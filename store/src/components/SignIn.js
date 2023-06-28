@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage, MDBInput, MDBIcon } from 'mdb-react-ui-kit';
 import { CDBBtn } from 'cdbreact';
 import { login } from '../redux/loginSlice';
+import { ToastContainer, toast } from 'react-toastify';
 
 function SignIn() {
   const dispatch = useDispatch();
@@ -10,12 +11,18 @@ function SignIn() {
   const [password, setPassword] = useState('');
   const isLoading = useSelector((state) => state.auth.loading);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    try {
+      const response = await dispatch(login({ email, password }));
+      toast(response.payload.msg);
+    }catch (error) {
+    }
   };
 
   return (
+    <>
+    <ToastContainer />
     <MDBContainer fluid>
       <MDBCard className='text-black m-5A mx-auto mt' style={{ borderRadius: '25px', padding: '30px', maxWidth: '800px', marginTop: '80px' }}>
         <MDBCardBody>
@@ -64,6 +71,7 @@ function SignIn() {
         </MDBCardBody>
       </MDBCard>
     </MDBContainer>
+    </>
   );
 }
 

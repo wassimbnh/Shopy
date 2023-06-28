@@ -102,7 +102,7 @@ const userController = {
         res.cookie("_apprftoken", rf_token, {
             httpOnly: true,
             path: "/api/auth/access",
-            maxAage: 24 * 60 * 60 * 1000, // 24h
+            maxAge: 24 * 60 * 60 * 1000, // 24h
         }); 
 
           
