@@ -105,6 +105,7 @@ const userController = {
             maxAage: 24 * 60 * 60 * 1000, // 24h
         }); 
 
+          
       // signing success
       res.status(200).json({ msg: "Signing success" });
         
