@@ -21,11 +21,9 @@ function SignIn() {
   const onSubmit = async (e) => {
     try {
       const response = await dispatch(login({ email, password }));
-      console.log(response.payload.token)
-      localStorage.setItem("rf_token", response.payload.token);
+      
       toast(response.payload.msg);
-      console.log(response)
-      if(isLoading._appSignging) {
+      if(localStorage.getItem("rf_token")) {
         navigate('/')
       }
     }catch (error) {
