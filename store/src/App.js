@@ -14,6 +14,9 @@ import Auth from './pages/Auth';
 import SignUp from './components/SignUp';
 import ForgotPassword from './components/ForgotPassword';
 import ActivationUser from './components/ActivationUser';
+import ProfileComponent from './components/Profile';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
@@ -31,6 +34,7 @@ function App() {
       <Route path="signup" element={<SignUp />}/>
       <Route path="forgot-password" element={<ForgotPassword />}/>
       <Route path= {`activate/:activation_token`} element={<ActivationUser />}/>
+      <Route path= "/profile" element={<ProfileComponent />}/>
     </Routes>
     </Container>
     <Footer />
