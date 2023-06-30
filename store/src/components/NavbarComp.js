@@ -8,13 +8,14 @@ import { BiLogOut} from 'react-icons/bi'
 import {CgProfile}from 'react-icons/cg'
 import { CDBBtn } from "cdbreact";
 import { useNavigate } from 'react-router'
+import { useSelector } from 'react-redux'
 
 
 const NavbarComp = () => {
-  const isLoggedIn = false
   const cart = useContext(CartContext)
   const [show, setShow] = useState(false)
   const [showProfile, setShowProfile] = useState(false);
+  const isLoggedIn = useSelector((state) => state.login.token);
 
   const navigate= useNavigate()
 
@@ -67,7 +68,7 @@ const NavbarComp = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
         <div className="d-flex align-items-center px-3 ">
-            {isLoggedIn ? (
+            {!isLoggedIn ? (
               <Dropdown className='px-3'>
                 <Dropdown.Toggle variant="link" id="dropdown-basic" className="p-0">
                   <img

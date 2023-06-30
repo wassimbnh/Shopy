@@ -31,7 +31,7 @@
             .addCase(login.fulfilled, (state, action) => {
               state.loading = false;
               state.isLoggedIn = true;
-              state.token = action.payload.token; // Modify this line
+              state.token = action.payload.token; 
             })
             .addCase(login.rejected, (state, action) => {
               state.loading = false;
