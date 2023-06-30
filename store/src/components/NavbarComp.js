@@ -84,9 +84,17 @@ console.log(isLoggedIn)
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu >
-                  <Dropdown.Item href=""><CgProfile />Profile</Dropdown.Item>
-                  <Dropdown.Item href="" ><BiLogOut className='mr-1'/>
-                  <button onClick={handleLogout}>
+                  <Dropdown.Item href="/profile"><CgProfile />Profile</Dropdown.Item>
+                  <Dropdown.Item href="" >
+                  <button onClick={handleLogout}
+                  style={{
+                    border: 'none',
+                    background: 'none',
+                    cursor: 'pointer',
+                    padding: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}><BiLogOut className='mr-1'/>
                   Logout
                   </button>
                   </Dropdown.Item>
