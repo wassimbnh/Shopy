@@ -8,22 +8,20 @@ import { BiLogOut} from 'react-icons/bi'
 import {CgProfile}from 'react-icons/cg'
 import { CDBBtn } from "cdbreact";
 import { useNavigate } from 'react-router'
-import { useSelector } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../redux/loginSlice'
 
 const NavbarComp = () => {
   const cart = useContext(CartContext)
   const [show, setShow] = useState(false)
-  const [showProfile, setShowProfile] = useState(false);
-  const isLoggedIn = useSelector((state) => state.login.token);
+  //const isLoggedIn = useSelector((state) => state.login.token);
+  const isLoggedIn = localStorage.getItem("rf_token")
+  const navigate= useNavigate();
+  const dispatch = useDispatch();
 
-  const navigate= useNavigate()
 
-
-
-  const handleProfileToggle = () => {
-    setShowProfile(!showProfile);
-  };
+console.log(isLoggedIn)
+  
 
   const handleClose = () => {
     setShow(false)
@@ -32,6 +30,11 @@ const NavbarComp = () => {
   const handleShow = () => {
     setShow(true)
   }
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/signin');
+  };
 
   const productCount = cart.items.reduce((sum, product) => sum + product.quantity, 0)
 
@@ -68,7 +71,7 @@ const NavbarComp = () => {
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
         <div className="d-flex align-items-center px-3 ">
-            {!isLoggedIn ? (
+            {isLoggedIn ? (
               <Dropdown className='px-3'>
                 <Dropdown.Toggle variant="link" id="dropdown-basic" className="p-0">
                   <img
@@ -77,13 +80,16 @@ const NavbarComp = () => {
                     className="d-inline-block align-top mx-2 rounded-circle "
                     alt="avatar1"
                     src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
-                    onClick={handleProfileToggle}
                   />
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu show={showProfile}>
-                  <Dropdown.Item href="#/action-1"><CgProfile />Profile</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2" ><BiLogOut className='mr-1'/>Logout</Dropdown.Item>
+                <Dropdown.Menu >
+                  <Dropdown.Item href=""><CgProfile />Profile</Dropdown.Item>
+                  <Dropdown.Item href="" ><BiLogOut className='mr-1'/>
+                  <button onClick={handleLogout}>
+                  Logout
+                  </button>
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             ) : (

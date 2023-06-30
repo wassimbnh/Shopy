@@ -12,16 +12,20 @@
         return rejectWithValue(error.response.data);
       }
     });
+    
 
     const loginSlice = createSlice({
         name: 'auth',
         initialState: {
-          isLoggedIn: false,
-          token: null,
+          token: '',
           loading: false,
           error: null,
         },
-        reducers: {},
+        reducers: {
+          logout: (state) => {
+          state.token = null;
+          localStorage.clear();
+        }},
         extraReducers: (builder) => {
           builder
             .addCase(login.pending, (state) => {
@@ -40,5 +44,8 @@
             });
         },
       });
+
+      export const {  logout } = loginSlice.actions;
+
       
     export default loginSlice.reducer;

@@ -34,7 +34,6 @@
       try {
         const response = await dispatch(login({ email, password }));
         
-        console.log(rfToken)
         toast(response.payload.msg);
         
       }catch (error) {

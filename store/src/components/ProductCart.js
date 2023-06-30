@@ -11,7 +11,6 @@ const ProductCart = (props) => {
   const cart = useContext(CartContext);
   const productQuantity = cart.getProductQuantity(product.id);
   const navigate = useNavigate();
-  console.log(cart.items);
 
   function handleItem(){
     navigate(`item/${product.ident}`);
