@@ -5,6 +5,7 @@ import { CDBBtn } from 'cdbreact';
 import { login } from '../redux/loginSlice';
 import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
 
 function SignIn() {
   const form = useForm();
@@ -14,13 +15,19 @@ function SignIn() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const isLoading = useSelector((state) => state.auth.loading);
+  const isLoading = useSelector((state) => state.auth.login);
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
-    e.preventDefault();
     try {
       const response = await dispatch(login({ email, password }));
+      console.log(response.payload.token)
+      localStorage.setItem("rf_token", response.payload.token);
       toast(response.payload.msg);
+      console.log(response)
+      if(isLoading._appSignging) {
+        navigate('/')
+      }
     }catch (error) {
       toast(error.msg);
     }
