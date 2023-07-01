@@ -151,12 +151,12 @@ const userController = {
       const ac_token = createToken.access({ id: user.id });
 
         // send email
-      const url = `http://localhost:3000/auth/reset-password/${ac_token}`;
+      const url = `http://localhost:3000/reset-password/${ac_token}`;
 
       mailSender(email,"ECOFIT RESET PASSWORD ",url);
 
       // success
-      res.status(400).json({ msg: "Resend the password, please check your email." });
+      res.status(200).json({ msg: "Resend the password, please check your email." });
 
         }catch(err){
             res.status(400).json({msg: err.message});
