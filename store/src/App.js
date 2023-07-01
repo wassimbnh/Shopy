@@ -16,6 +16,7 @@ import ForgotPassword from './components/ForgotPassword';
 import ActivationUser from './components/ActivationUser';
 import ProfileComponent from './components/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ResetPassword from './components/ResetPassword';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <Route path="signin" element={<Auth />}/>
       <Route path="signup" element={<SignUp />}/>
       <Route path="forgot-password" element={<ForgotPassword />}/>
+      <Route path="reset-password" element={<ResetPassword />}/>
       <Route path= {`activate/:activation_token`} element={<ActivationUser />}/>
       <Route path= "/profile" element={<ProfileComponent />}/>
     </Routes>

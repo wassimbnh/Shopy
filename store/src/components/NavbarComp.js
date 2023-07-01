@@ -33,7 +33,7 @@ console.log(isLoggedIn)
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/signin');
+    navigate('/');
   };
 
   const productCount = cart.items.reduce((sum, product) => sum + product.quantity, 0)

@@ -43,7 +43,7 @@ console.log('form submit', data);
                 <MDBInput
                             label='Your Email'
                             id='email'
-                            type='email'
+                            type='text'
                             className='w-100'
                             {...register('email', {
                             required: 'Email is required',
