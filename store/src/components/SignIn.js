@@ -7,6 +7,7 @@
   import { useForm } from 'react-hook-form';
   import { useNavigate } from 'react-router';
   import { useEffect } from 'react';
+  import "../App.css"
 
   function SignIn() {
     const form = useForm();
@@ -80,10 +81,16 @@
                     />
                         <p className='text-danger'>{errors.password?.message}</p>
                   </div>
-                  <CDBBtn color='primary' circle size='lg' className='px-4 py-2' type='submit' disabled={isLoading}>
+                  <CDBBtn color='primary' circle size='lg' className='px-4 py-2 mr-3' type='submit' disabled={isLoading}>
                     Sign in
                   </CDBBtn>
                 </form>
+                <div className="google-btn m-3">
+                  <div class="google-icon-wrapper">
+                    <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                  </div>
+                  <p class="btn-text"><b>Sign in with google</b></p>
+                </div>
                 <div className='d-flex align-items'>
                   <a href='/forgot-password' className='px-4'>
                     Forgot Password?
