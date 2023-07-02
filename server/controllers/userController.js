@@ -3,7 +3,9 @@ const validEmail = require('../helpers/validateEmail')
 const  {mailSender} = require('../helpers/mailSender')
 const createToken = require('../helpers/createToken')
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const { google } = require("googleapis");
+const { OAuth2 } = google.auth;
 
 
 const userController = {
@@ -226,6 +228,67 @@ const userController = {
       }catch(err){
          res.status(500).json({msg : err.message})
         }
+    },
+
+    google: async (req, res) => {
+      try {
+        // get Token Id
+        const { tokenId } = req.body; 
+  
+        // verify Token Id
+        const client = new OAuth2(G_CLIENT_ID);
+        const verify = await client.verifyIdToken({
+          idToken: tokenId,
+          audience: G_CLIENT_ID,
+        });
+  
+        // get data
+        const { email_verified, email, name, picture } = verify.payload;
+  
+        // failed verification
+        if (!email_verified)
+          return res.status(400).json({ msg: "Email verification failed." });
+  
+        // passed verification
+        const user = await User.findOne({ email });
+        // 1. If user exist / sign in
+        if (user) {
+          // refresh token
+          const rf_token = createToken.refresh({ id: user._id });
+          // store cookie
+          res.cookie("_apprftoken", rf_token, {
+            httpOnly: true,
+            path: "/api/auth/access-user",
+            maxAge: 24 * 60 * 60 * 1000, // 24hrs
+          });
+          res.status(200).json({ msg: "Signing with Google success." });
+        } else {
+          // new user / create user
+          const password = email + process.env.G_CLIENT_ID;
+          const salt = await bcrypt.genSalt();
+          const hashPassword = await bcrypt.hash(password, salt);
+          const newUser = new User({
+            name,
+            email,
+            password: hashPassword,
+            avatar: picture,
+          });
+          await newUser.save();
+          // sign in the user
+          // refresh token
+          const rf_token = createToken.refresh({ id: user._id });
+          // store cookie
+          res.cookie("_apprftoken", rf_token, {
+            httpOnly: true,
+            path: "/api/auth/access-user",
+            maxAge: 24 * 60 * 60 * 1000, // 24hrs
+          });
+          // success
+          res.status(200).json({ msg: "Signing with Google success.", token: rf_token  });
+        }
+      } catch (err) {
+        res.status(500).json({ msg: err.message });
+      }
     },
 
 
