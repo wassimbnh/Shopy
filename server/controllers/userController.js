@@ -252,13 +252,13 @@ const userController = {
         // passed verification
         const user = await User.findOne({ email });
         // 1. If user exist / sign in
-        if (user) {
+        if (user) {        
           // refresh token
           const rf_token = createToken.refresh({ id: user._id });
           // store cookie
           res.cookie("_apprftoken", rf_token, {
             httpOnly: true,
-            path: "/api/auth/access-user",
+            path: "/api/auth/access",
             maxAge: 24 * 60 * 60 * 1000, // 24hrs
           });
           res.status(200).json({ msg: "Signing with Google success." });
