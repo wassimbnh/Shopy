@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const googleLogin = createAsyncThunk('auth/google-login', async (credentials, { rejectWithValue }) => {
+export const googleLogin = createAsyncThunk('auth/google-login', async (res, { rejectWithValue }) => {
+    const token = res?.tokenId;
 try{
-const response = await axios.post('http://localhost:4000/api/auth/google-signin', credentials);
+const response = await axios.post('http://localhost:4000/api/auth/google-signin', { tokenId: token });
 
 localStorage.setItem("rf_token", response.data.token)
 
@@ -14,30 +15,26 @@ return response.data;
 });
 
 
-const loginSlice = createSlice({
-    name: 'auth',
+const googleLoginSlice = createSlice({
+    name: 'login',
     initialState: {
       token: '',
       loading: false,
       error: null,
     },
-    reducers: {
-      logout: (state) => {
-      state.token = null;
-      localStorage.clear();
-    }},
+    reducers: {},
     extraReducers: (builder) => {
       builder
-        .addCase(login.pending, (state) => {
+        .addCase(googleLogin.pending, (state) => {
           state.loading = true;
           state.error = null;
         })
-        .addCase(login.fulfilled, (state, action) => {
+        .addCase(googleLogin.fulfilled, (state, action) => {
           state.loading = false;
           state.isLoggedIn = true;
           state.token = action.payload.token; 
         })
-        .addCase(login.rejected, (state, action) => {
+        .addCase(googleLogin.rejected, (state, action) => {
           state.loading = false;
           state.error = action.error.message;
           state.error = action.payload?.msg;
@@ -45,7 +42,6 @@ const loginSlice = createSlice({
     },
   });
 
-  export const {  logout } = loginSlice.actions;
 
   
-export default loginSlice.reducer;
+export default googleLoginSlice.reducer;

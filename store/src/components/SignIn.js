@@ -1,4 +1,4 @@
-  import React, { useState } from 'react';
+  import React, { useState, useEffect } from 'react';
   import { useDispatch, useSelector } from 'react-redux';
   import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage, MDBInput, MDBIcon } from 'mdb-react-ui-kit';
   import { CDBBtn } from 'cdbreact';
@@ -6,8 +6,10 @@
   import { ToastContainer, toast } from 'react-toastify';
   import { useForm } from 'react-hook-form';
   import { useNavigate } from 'react-router';
-  import { useEffect } from 'react';
   import "../App.css"
+import { googleLogin } from '../redux/googleLoginSlice';
+import GoogleLogin from "react-google-login";
+import { loadGapiInsideDOM } from "gapi-script";
 
   function SignIn() {
     const form = useForm();
@@ -25,8 +27,6 @@
 
     useEffect(() => {
       if (rfToken) {
-        // Perform actions when rfToken is updated to login
-        console.log('rfToken changed to login');
         navigate('/');
       }
     }, [rfToken, navigate]);
@@ -41,6 +41,21 @@
         toast(error.msg);
       }
     };
+
+    const googleSubmit = async (res) =>{
+      try{
+        const response = await dispatch(googleLogin());
+        toast(response.payload.msg)
+      }catch(error){
+        toast(error.msg)
+      }
+    }
+
+    useEffect(() => {
+      (async () => {
+        await loadGapiInsideDOM();
+      })();
+    });
 
     return (
       <>
