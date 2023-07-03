@@ -1,64 +1,67 @@
-  import React, { useState, useEffect } from 'react';
-  import { useDispatch, useSelector } from 'react-redux';
-  import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage, MDBInput, MDBIcon } from 'mdb-react-ui-kit';
-  import { CDBBtn } from 'cdbreact';
-  import { login } from '../redux/loginSlice';
-  import { ToastContainer, toast } from 'react-toastify';
-  import { useForm } from 'react-hook-form';
-  import { useNavigate } from 'react-router';
-  import "../App.css"
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage, MDBInput, MDBIcon } from 'mdb-react-ui-kit';
+import { CDBBtn } from 'cdbreact';
+import { login } from '../redux/loginSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
+import "../App.css";
 import { googleLogin } from '../redux/googleLoginSlice';
 import GoogleLogin from "react-google-login";
 import { loadGapiInsideDOM } from "gapi-script";
 
-  function SignIn() {
-    const form = useForm();
-    const { register, formState, handleSubmit } = form;
-    const { errors } = formState;
 
-    const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const isLoading = useSelector((state) => state.auth.login);
-    const navigate = useNavigate();
-    const rfToken = useSelector((state) => state.login.token);
+function SignIn() {
+  const form = useForm();
+  const { register, formState, handleSubmit } = form;
+  const { errors } = formState;
 
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const isLoading = useSelector((state) => state.auth.login);
+  const navigate = useNavigate();
+  const rfToken = useSelector((state) => state.login.token);
 
-
-    useEffect(() => {
-      if (rfToken) {
-        navigate('/');
-      }
-    }, [rfToken, navigate]);
-
-    const onSubmit = async (e) => {
-      try {
-        const response = await dispatch(login({ email, password }));
-        
-        toast(response.payload.msg);
-        
-      }catch (error) {
-        toast(error.msg);
-      }
-    };
-
-    const googleSubmit = async (res) =>{
-      try{
-        const response = await dispatch(googleLogin());
-        toast(response.payload.msg)
-      }catch(error){
-        toast(error.msg)
-      }
+  useEffect(() => {
+    if (rfToken) {
+      navigate('/');
     }
+  }, [rfToken, navigate]);
 
-    useEffect(() => {
-      (async () => {
-        await loadGapiInsideDOM();
-      })();
-    });
+  const onSubmit = async (e) => {
+    try {
+      const response = await dispatch(login({ email, password }));
 
-    return (
-      <>
+      toast(response.payload.msg);
+    } catch (error) {
+      toast(error.msg);
+    }
+  };
+
+  const googleSuccess = async (res) => {
+    try {
+      const response = await dispatch(googleLogin(res));
+      toast(response.payload.msg);
+    } catch (error) {
+      toast(error.msg);
+    }
+  };
+
+  const googleFailure = (error) => {
+    console.log(error);
+    toast('Google Sign In failed. Please try again.');
+  };
+
+  useEffect(() => {
+    (async () => {
+      await loadGapiInsideDOM();
+    })();
+  }, []);
+
+  return (
+    <>
       <ToastContainer />
       <MDBContainer fluid>
         <MDBCard className='text-black m-5A mx-auto mt' style={{ borderRadius: '25px', padding: '30px', maxWidth: '800px', marginTop: '80px' }}>
@@ -80,7 +83,7 @@ import { loadGapiInsideDOM } from "gapi-script";
                       })}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                        <p className='text-danger'>{errors.email?.message}</p>
+                    <p className='text-danger'>{errors.email?.message}</p>
                   </div>
                   <div className='d-flex flex-row align-items-center mb-4'>
                     <MDBIcon fas icon='lock me-3' size='lg' />
@@ -94,7 +97,7 @@ import { loadGapiInsideDOM } from "gapi-script";
                       })}
                       onChange={(e) => setPassword(e.target.value)}
                     />
-                        <p className='text-danger'>{errors.password?.message}</p>
+                    <p className='text-danger'>{errors.password?.message}</p>
                   </div>
                   <CDBBtn color='primary' circle size='lg' className='px-4 py-2 mr-3' type='submit' disabled={isLoading}>
                     Sign in
@@ -102,9 +105,18 @@ import { loadGapiInsideDOM } from "gapi-script";
                 </form>
                 <div className="google-btn m-3">
                   <div class="google-icon-wrapper">
-                    <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                    <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo" />
                   </div>
-                  <p class="btn-text"><b>Sign in with google</b></p>
+                  <GoogleLogin
+                    clientId={process.env.REACT_APP_G_CLIENT_ID}
+                    clientSecret={process.env.REACT_APP_G_CLIENT_SECRET}
+                    onSuccess={googleSuccess}
+                    onFailure={googleFailure}
+                    cookiePolicy={"single_host_origin"}
+                    render={(renderProps) => (
+                      <button class="btn-text" onClick={renderProps.onClick} type="submit" disabled={renderProps.disabled}>Sign in with Google</button>
+                    )}
+                  />
                 </div>
                 <div className='d-flex align-items'>
                   <a href='/forgot-password' className='px-4'>
@@ -122,8 +134,8 @@ import { loadGapiInsideDOM } from "gapi-script";
           </MDBCardBody>
         </MDBCard>
       </MDBContainer>
-      </>
-    );
-  }
+    </>
+  );
+}
 
-  export default SignIn;
+export default SignIn;
