@@ -44,6 +44,7 @@ function SignIn() {
     try {
       const response = await dispatch(googleLogin(res));
       toast(response.payload.msg);
+      navigate('/');
     } catch (error) {
       toast(error.msg);
     }
@@ -59,6 +60,8 @@ function SignIn() {
       await loadGapiInsideDOM();
     })();
   }, []);
+
+  
 
   return (
     <>
@@ -114,7 +117,7 @@ function SignIn() {
                     onFailure={googleFailure}
                     cookiePolicy={"single_host_origin"}
                     render={(renderProps) => (
-                      <button class="btn-text" onClick={renderProps.onClick} type="submit" disabled={renderProps.disabled}>Sign in with Google</button>
+                      <p class="btn-text" onClick={renderProps.onClick} type="submit" disabled={renderProps.disabled}>Sign in with Google</p>
                     )}
                   />
                 </div>

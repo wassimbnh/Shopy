@@ -16,7 +16,7 @@ return response.data;
 
 
 const googleLoginSlice = createSlice({
-    name: 'login',
+    name: 'googlelogin',
     initialState: {
       token: '',
       loading: false,

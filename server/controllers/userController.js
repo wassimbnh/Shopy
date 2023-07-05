@@ -8,6 +8,7 @@ const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 
 
+
 const userController = {
 
     register: async (req,res) =>{
@@ -261,7 +262,7 @@ const userController = {
             path: "/api/auth/access",
             maxAge: 24 * 60 * 60 * 1000, // 24hrs
           });
-          res.status(200).json({ msg: "Signing with Google success." });
+          res.status(200).json({ msg: "Signing with Google success.", token: rf_token });
         } else {
           // new user / create user
           const password = email + process.env.G_CLIENT_ID;
