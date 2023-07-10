@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 
-
+const G_CLIENT_ID = '456398736666-7l4kjpvnr780tffq6cf4tpiveegotd1h.apps.googleusercontent.com'
 
 const userController = {
 

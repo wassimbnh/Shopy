@@ -20,9 +20,6 @@ const NavbarComp = () => {
   const dispatch = useDispatch();
 
 
-console.log(isLoggedIn)
-  
-
   const handleClose = () => {
     setShow(false)
   }
