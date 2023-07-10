@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   MDBContainer,
   MDBRow,
@@ -12,8 +12,10 @@ import {
 from 'mdb-react-ui-kit';
 import { CDBBtn } from "cdbreact";
 import { useForm } from 'react-hook-form';
-
-
+import { useParams } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { resetPassword } from '../redux/resetPasswordSlice';
+import { ToastContainer, toast } from 'react-toastify';
 
 function ResetPassword() {
 
@@ -21,15 +23,27 @@ function ResetPassword() {
 const { register, formState, handleSubmit, watch } = form;
 const { errors } = formState;
 const password = watch('password');
+const [passwords, setPassword] = useState('')
+const [confirmPassword, setConfirmPassword] = useState('')
+
+const { token } = useParams();
+const dispatch = useDispatch();
 
 
-const onSubmit = (data) => {
-console.log('form submit', data);
+const onSubmit = async (data) => {
+  try{
+    const response = await dispatch(resetPassword({ passwords, confirmPassword, token }));
+    toast(response.payload.msg);
+    console.log(response)
+  }catch(error){
+    toast(error.msg);
+  }
+
 };
 
   return (
     <MDBContainer fluid>
-
+      <ToastContainer />
       <MDBCard className='text-black m-5A mx-auto mt' style={{borderRadius: '25px', padding: '30px', maxWidth: '800px', marginTop: '80px'}}>
         <MDBCardBody>
           <MDBRow>
@@ -53,6 +67,7 @@ console.log('form submit', data);
                           message: 'Password should have at least 8 characters',
                         },
                       })}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <p className='text-danger'>{errors.password?.message}</p>
                   </div>
@@ -67,6 +82,7 @@ console.log('form submit', data);
                         required: 'Confirm password is required',
                         validate: (value) => value === password || 'Passwords do not match',
                       })}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     {errors.confirmPassword && <p className='text-danger'>{errors.confirmPassword.message}</p>}
                   </div>

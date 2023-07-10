@@ -34,7 +34,7 @@ function App() {
       <Route path="signin" element={<Auth />}/>
       <Route path="signup" element={<SignUp />}/>
       <Route path="forgot-password" element={<ForgotPassword />}/>
-      <Route path={"reset-password/:ac_token"} element={<ResetPassword />}/>
+      <Route path={"reset-password/:token"} element={<ResetPassword />}/>
       <Route path= {`activate/:activation_token`} element={<ActivationUser />}/>
       <Route path= "/profile" element={<ProfileComponent />}/>
     </Routes>

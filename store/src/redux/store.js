@@ -5,6 +5,7 @@ import activateReducer from './activateSlice';
 import loginReducer from './loginSlice';
 import forgetPasswordReducer from './forgetPasswordSlice';
 import googleLoginReducer from './googleLoginSlice';
+import  resetPasswordReducer  from './resetPasswordSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,7 +13,8 @@ const store = configureStore({
     activ: activateReducer,
     login: loginReducer,
     forget: forgetPasswordReducer,
-    google: googleLoginReducer
+    google: googleLoginReducer,
+    resetPassword: resetPasswordReducer
   },
 });
 

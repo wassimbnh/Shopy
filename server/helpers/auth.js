@@ -5,12 +5,12 @@ const auth = (req, res, next) => {
   try {
     // check accsess token
     const token = req.header("Authorization");
-    if (!token) return res.status(400).json({ msg: "Authentication failed." })
+    if (!token) return res.status(400).json({ msg: "Authentication is failed." })
 
     // validate to see if our server is signed in
     jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
       if (err) 
-        return res.status(400).json({ msg: "Authentication failed." });
+        return res.status(400).json({ msg: "Authentication failed" });
       // success
       req.user = user;
       next();
