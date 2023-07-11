@@ -133,27 +133,34 @@ button {
 }
 
 
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
 
 .profile-card {
-  width: 300px;
+  width: 400px;
   background-color: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   /* Add the following changes */
-  position: absolute;
-  top: 80px;
-  right: 20px;
-  z-index: 999;
+  padding: 20px;
 }
+
 
 .profile-image {
   display: flex;
   justify-content: center;
-  margin-top: -30px; /* Adjust the margin-top value to make it align properly */
+  margin-top: -60px;
   padding: 10px;
-  margin-bottom: 40px; 
-  z-index: 1; /* Add z-index to ensure the image is displayed above the card */
+  margin-bottom: 40px;
+  z-index: 1;
 }
 
 .profile-image img {

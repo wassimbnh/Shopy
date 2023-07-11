@@ -1,25 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const config = {
-  headers: {
-    'Content-Type': 'application/json',
-  },
-};
 
 const resetPassword = createAsyncThunk(
   'password/reset',
-  async ({ passwords, confirmPassword, token }, { rejectWithValue }) => {
+  async ({ passwords, token }, { rejectWithValue }) => {
     try {
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      };
+      
 
       const response = await axios.post(
         'http://localhost:4000/api/auth/reset-password',
-        { passwords, confirmPassword },
-        { headers }
+        { passwords},
+        {
+          headers: { Authorization: token },
+        }
       );
       return response.data;
     } catch (error) {

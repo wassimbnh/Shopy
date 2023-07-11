@@ -26,20 +26,22 @@ const password = watch('password');
 const [passwords, setPassword] = useState('')
 const [confirmPassword, setConfirmPassword] = useState('')
 
-const { token } = useParams();
+const {ac_token}  = useParams();
 const dispatch = useDispatch();
 
 
 const onSubmit = async (data) => {
-  try{
-    const response = await dispatch(resetPassword({ passwords, confirmPassword, token }));
+  try {
+    const response = await dispatch(
+      resetPassword({ passwords, ac_token })
+    );
     toast(response.payload.msg);
-    console.log(response)
-  }catch(error){
+    console.log(response);
+  } catch (error) {
     toast(error.msg);
   }
-
 };
+
 
   return (
     <MDBContainer fluid>

@@ -14,7 +14,6 @@ function ForgotPassword() {
   const dispatch = useDispatch();
 
   const onSubmit = async (e) => {
-    console.log(e); // Add this line to check the form data
     try {
       const response = await dispatch(forgetPassword( email ));
       toast(response.payload.msg);
