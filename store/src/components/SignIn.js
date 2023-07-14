@@ -35,6 +35,7 @@ function SignIn() {
       const response = await dispatch(login({ email, password }));
 
       toast(response.payload.msg);
+      console.log(response.payload)
     } catch (error) {
       toast(error.msg);
     }

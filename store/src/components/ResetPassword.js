@@ -32,9 +32,8 @@ const dispatch = useDispatch();
 
 const onSubmit = async (data) => {
   try {
-    const response = await dispatch(
-      resetPassword({ passwords, ac_token })
-    );
+    const response = await dispatch(resetPassword({ passwords, ac_token }));
+    
     toast(response.payload.msg);
     console.log(response);
   } catch (error) {
