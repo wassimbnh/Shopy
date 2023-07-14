@@ -4,15 +4,15 @@ import axios from 'axios';
 
 const resetPassword = createAsyncThunk(
   'password/reset',
-  async ({ passwords, token }, { rejectWithValue }) => {
+  async ({ password, token }, { rejectWithValue }) => {
     try {
       
 
       const response = await axios.post(
         'http://localhost:4000/api/auth/reset-password',
-        { passwords},
+        { password},
         {
-          headers: { Authorization: token },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       return response.data;
